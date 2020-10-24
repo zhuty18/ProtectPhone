@@ -1,0 +1,1 @@
+java -jar plantuml.jar GameConstruct.puml -charset UTF-8
