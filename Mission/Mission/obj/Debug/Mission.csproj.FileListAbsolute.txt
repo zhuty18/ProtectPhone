@@ -1,0 +1,9 @@
+D:\zty\Life\ProtectPhone\Mission\Mission\bin\Debug\Mission.dll
+D:\zty\Life\ProtectPhone\Mission\Mission\bin\Debug\Mission.pdb
+D:\zty\Life\ProtectPhone\Mission\Mission\bin\Debug\UnityEngine.dll
+D:\zty\Life\ProtectPhone\Mission\Mission\bin\Debug\UnityEngine.xml
+D:\zty\Life\ProtectPhone\Mission\Mission\obj\Debug\Mission.csprojAssemblyReference.cache
+D:\zty\Life\ProtectPhone\Mission\Mission\obj\Debug\Mission.csproj.CoreCompileInputs.cache
+D:\zty\Life\ProtectPhone\Mission\Mission\obj\Debug\Mission.csproj.CopyComplete
+D:\zty\Life\ProtectPhone\Mission\Mission\obj\Debug\Mission.dll
+D:\zty\Life\ProtectPhone\Mission\Mission\obj\Debug\Mission.pdb
