@@ -8,9 +8,15 @@ public class GameCharacter : MonoBehaviour
     public int hp;
     public int maxHp;
     public float moveSpeed;
+    public float jumpForce;
+    public int direction;
 
     private List<Effect> effects;
     private List<Tool> backpack;
+
+    public Rigidbody2D body;
+    public Collider2D collider;
+    public LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start()

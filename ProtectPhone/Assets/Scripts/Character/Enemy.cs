@@ -37,4 +37,9 @@ public class Enemy : GameCharacter, IDamagable
             hp -= (int) Mathf.RoundToInt(amount);
         }
     }
+    
+    public void BeDamaged(DamageCarrier damageCarrier) 
+    {
+        GetDamage(50);
+    }
 }
