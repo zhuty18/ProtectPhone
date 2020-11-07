@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : GameCharacter
+public class DamageCarrier : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,12 +14,5 @@ public class NPC : GameCharacter
     void Update()
     {
         
-    }
-
-    public void BeInteracted(GameCharacter interacter) {}
-
-    public bool ReceiveTool(Tool tool, int count)
-    {
-        return false;
     }
 }

@@ -6,5 +6,5 @@ public class Tool : MonoBehaviour
 {
     public int id;
     
-    public virtual void Use(Character character);
+    public virtual void Use(GameCharacter character){}
 }
