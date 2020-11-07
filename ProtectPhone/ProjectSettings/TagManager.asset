@@ -13,13 +13,8 @@ TagManager:
   - UI
   - 
   - 
-<<<<<<< HEAD
-  - ground
   - 
-=======
-  - Background
-  - Platforms
->>>>>>> b9a05cb2bfbc3f3137af34ddeaa8b5cc71c1a837
+  - 
   - 
   - 
   - 
@@ -47,23 +42,17 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 4155383885
+    uniqueID: 2622722681
     locked: 0
   - name: Ornament
-    uniqueID: 2122632665
+    uniqueID: 3528152453
     locked: 0
   - name: Platforms
-    uniqueID: 1385897399
+    uniqueID: 4109816297
     locked: 0
   - name: Ladders
-    uniqueID: 437972993
+    uniqueID: 4254430275
     locked: 0
   - name: Barriers
-    uniqueID: 1676937597
-    locked: 0
-  - name: Items
-    uniqueID: 906099005
-    locked: 0
-  - name: Character
-    uniqueID: 3792091655
+    uniqueID: 896384181
     locked: 0
