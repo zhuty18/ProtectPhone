@@ -8,26 +8,14 @@ public class Pack : MonoBehaviour
     
     public Pack()
     {
-        Tools = new List<Tool>();
-    }
-    public void addTool(int index, int n)
-    {
-        Tools.Add(new Tool(index, n));
+        tools = new List<Tool>();
     }
     public void addTool(Tool res)
     {
-        Tools.Add(res);
+        tools.Add(res);
     }
     public List<Tool> getTools()
     {
-        return Tools;
-    }
-    public void deBug()
-    {
-        System.Diagnostics.Debug.WriteLine("Pack: ");
-        foreach (Tool res in Tools)
-        {
-            res.deBug();
-        }
+        return tools;
     }
 }

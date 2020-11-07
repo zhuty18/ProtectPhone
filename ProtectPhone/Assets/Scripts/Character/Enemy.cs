@@ -5,12 +5,11 @@ using UnityEngine;
 public class Enemy : GameCharacter, IDamagable
 {
     public Transform target;
-    public int hp = 100;
-    public float moveSpeed = 2;  // distance per frame
     // Start is called before the first frame update
     void Start()
     {
-
+        hp = 100;
+        moveSpeed = 2; // distance per frame
     }
 
     // Update is called once per frame
