@@ -18,5 +18,8 @@ public class NPC : GameCharacter
 
     public void BeInteracted(GameCharacter interacter) {}
 
-    public bool ReceiveTool(Tool tool, int count) {}
+    public bool ReceiveTool(Tool tool, int count)
+    {
+        return false;
+    }
 }

@@ -1,9 +1,0 @@
-D:\zty\Life\ProtectPhone\Mission\Runnable\bin\Debug\Runnable.exe
-D:\zty\Life\ProtectPhone\Mission\Runnable\bin\Debug\Runnable.pdb
-D:\zty\Life\ProtectPhone\Mission\Runnable\obj\Debug\Runnable.csproj.CoreCompileInputs.cache
-D:\zty\Life\ProtectPhone\Mission\Runnable\obj\Debug\Runnable.exe
-D:\zty\Life\ProtectPhone\Mission\Runnable\obj\Debug\Runnable.pdb
-D:\zty\Life\ProtectPhone\Mission\Runnable\bin\Debug\Mission.dll
-D:\zty\Life\ProtectPhone\Mission\Runnable\bin\Debug\Mission.pdb
-D:\zty\Life\ProtectPhone\Mission\Runnable\obj\Debug\Runnable.csprojAssemblyReference.cache
-D:\zty\Life\ProtectPhone\Mission\Runnable\obj\Debug\Runnable.csproj.CopyComplete
