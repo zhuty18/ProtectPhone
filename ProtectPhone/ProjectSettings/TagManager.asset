@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Ornament
+  - Platforms
+  - Ladders
+  - Barriers
+  - Characters
+  - Camera
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Barriers
     uniqueID: 896384181
+    locked: 0
+  - name: Characters
+    uniqueID: 3636937617
     locked: 0
