@@ -18,4 +18,16 @@ public class Pack : MonoBehaviour
     {
         return tools;
     }
+    public bool SubmitTool(int toolId)
+    {
+        foreach(Tool t in this.tools)
+        {
+            if(t.id==toolId)
+            {
+                tools.Remove(t);
+                return true;
+            }
+        }
+        return false;
+    }
 }

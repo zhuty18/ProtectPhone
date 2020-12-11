@@ -4,22 +4,70 @@ using UnityEngine;
 
 public class NPC : GameCharacter
 {
-    // Start is called before the first frame update
+    public Mission myMission;
+    public Dialog dia;
+    public string hello;
+    public string want;
+    public GameCharacter player;
+
     void Start()
     {
-        
+        this.name="小明";
+        this.hello="我是一个无害的NPC！";
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (this.player==null)
+        {
+            player=GameObject.Find("Player").GetComponent<Player>();
+        }
+        if (this.dia==null)
+        {
+            dia=GameObject.Find("Dialog").GetComponent<Dialog>();
+        }
+        if(Input.GetKeyDown(KeyCode.I)){
+            double dx=player.transform.position.x-this.transform.position.x;
+            double dy=player.transform.position.y-this.transform.position.y;
+            double dis=System.Math.Sqrt((dx*dx)+(dy*dy));
+            if(this.dia.Visiable())
+            {
+                this.dia.Hide();
+            }
+            else if(dis<2)
+            {
+                this.BeInteracted();
+            }
+        }
     }
 
-    public void BeInteracted(GameCharacter interacter) {}
-
-    public bool ReceiveTool(Tool tool, int count)
+    public void BeInteracted() 
     {
-        return false;
+        dia.intereacting=this;
+        dia.name.text=this.name;
+        this.want="我需要1个"+Tool.GetName(myMission.want)+"！";
+        dia.content.text=this.hello+'\n'+this.want;
+        dia.Show();
+    }
+
+    public void Check()
+    {
+        if(this.player.backpack.SubmitTool(myMission.want))
+        {
+            dia.content.text="谢谢你！";
+            player.GainReward(myMission.reward);
+            myMission.Finish();
+        }
+        else
+        {
+            dia.content.text="你身上没有带我要的东西……";
+        }
+        this.dia.Bye();
+    }
+
+    public void Refuse()
+    {
+        dia.content.text="好吧，希望下次你能给我。";
+        this.dia.Bye();
     }
 }
