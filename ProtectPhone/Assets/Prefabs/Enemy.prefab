@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3411667903893986912}
   - component: {fileID: -4322364278533685013}
   - component: {fileID: 1615361784222384639}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -658029679
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.7264151, g: 0.24328054, b: 0.24328054, a: 1}
@@ -156,7 +156,7 @@ MonoBehaviour:
   collider: {fileID: 3411667903893986912}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1024
   target: {fileID: 2981148601231699892, guid: 7e3601d9c03268b488e1767132bd5506, type: 3}
   weapon: {fileID: 0}
   pathFinder: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5466542140356997766}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
