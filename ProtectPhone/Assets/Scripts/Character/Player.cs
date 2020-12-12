@@ -72,6 +72,6 @@ public class Player : GameCharacter
         // d.SetPosition(transform.position,direction);
         Tool t=new Tool();
         t.id=1;
-        t.Use(bullet,this,direction);
+        t.Use(this);
     }
 }

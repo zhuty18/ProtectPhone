@@ -27,15 +27,16 @@ public class Tool : MonoBehaviour
         }
     }
     
-    public void Use(GameObject bullet,GameCharacter character,int dir)
+    public void Use(GameCharacter character)
     {
         switch(id)
         {
             case 1:
-                Debug.Log(bullet);
+                GameObject bullet = GameObject.Find("Player").GetComponent<Player>().bullet;
                 GameObject f = Instantiate(bullet);
                 DamageCarrier d=f.GetComponent<DamageCarrier>();
-                d.SetPosition(character.transform.position,dir);
+                d.SetPosition(character.transform.position,character.direction);
+                // Debug.Log(character.direction);
                 break;
         }
     }
