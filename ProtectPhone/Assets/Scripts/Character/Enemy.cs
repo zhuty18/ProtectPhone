@@ -71,8 +71,8 @@ public class Enemy : GameCharacter
                 velocity.x = 0;
             }
         }
-
-        transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime;
+        body.velocity+=this.velocity;
+        // transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime;
     }
 
     void MoveTowardsTarget() {
