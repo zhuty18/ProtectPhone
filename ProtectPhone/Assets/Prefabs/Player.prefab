@@ -128,6 +128,7 @@ MonoBehaviour:
   moveSpeed: 0
   jumpForce: 0
   direction: 0
+  backpack: {fileID: 0}
   body: {fileID: 0}
   collider: {fileID: 0}
   groundLayer:

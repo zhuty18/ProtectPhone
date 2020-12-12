@@ -12,7 +12,7 @@ public class GameCharacter : MonoBehaviour
     public int direction;
 
     private List<Effect> effects;
-    private List<Tool> backpack;
+    public Pack backpack;
 
     public Rigidbody2D body;
     public Collider2D collider;
@@ -21,7 +21,7 @@ public class GameCharacter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -43,7 +43,14 @@ public class GameCharacter : MonoBehaviour
 
     public void IncreaseEnergy(int amount) {}
 
-    public void GainReward(Pack pack) {}
+    public void GainReward(Pack pack)
+    {
+        foreach (Tool t in pack.getTools())
+        {
+            this.backpack.addTool(t);
+        }
+        Destroy(pack.gameObject);
+    }
 
     public void BeDamaged(DamageCarrier damageCarrier) {}
 

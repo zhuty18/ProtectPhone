@@ -6,12 +6,14 @@ public class Player : GameCharacter
 {
     public int jumpTime;
     public GameObject bullet;
+    public GameObject myPack;
     // Start is called before the first frame update
     void Start()
     {
         moveSpeed = 10;
         jumpForce = 5;
         jumpTime = 0;
+        backpack=Instantiate(myPack).GetComponent<Pack>();
     }
 
     // Update is called once per frame
