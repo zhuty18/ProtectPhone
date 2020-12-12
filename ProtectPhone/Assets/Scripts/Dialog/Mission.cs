@@ -12,7 +12,6 @@ public class Mission : MonoBehaviour
     public int want;
     public Pack reward;
     public GameObject myPack;
-    public GameObject myTool;
     
     void Start()
     {
@@ -21,9 +20,7 @@ public class Mission : MonoBehaviour
         want=6;
         phone.alpha=0;
         reward=Instantiate(myPack).GetComponent<Pack>();
-        Tool gift=Instantiate(myTool).GetComponent<Tool>();
-        gift.id=3;
-        reward.addTool(gift);
+        reward.addTool(3);
     }
     void Update() 
     {

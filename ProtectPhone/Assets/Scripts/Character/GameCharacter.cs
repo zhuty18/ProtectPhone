@@ -45,11 +45,12 @@ public class GameCharacter : MonoBehaviour
 
     public void GainReward(Pack pack)
     {
-        foreach (Tool t in pack.getTools())
-        {
-            this.backpack.addTool(t);
-        }
+        this.backpack.addPack(pack);
         Destroy(pack.gameObject);
+    }
+    public void addTool(int id)
+    {
+        this.backpack.addTool(id);
     }
 
     public void BeDamaged(DamageCarrier damageCarrier) {}

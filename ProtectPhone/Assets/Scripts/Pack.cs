@@ -4,30 +4,37 @@ using UnityEngine;
 
 public class Pack : MonoBehaviour
 {
-    private List<Tool> tools;
+    public int[] tools;
     
     public Pack()
     {
-        tools = new List<Tool>();
+        tools=new int[7];
+        for(int i=0;i<7;i++)
+        {
+            tools[i]=0;
+        }
     }
-    public void addTool(Tool res)
+    public void addTool(int toolId)
     {
-        tools.Add(res);
+        tools[toolId-1]++;
     }
-    public List<Tool> getTools()
+    public void addPack(Pack a)
     {
-        return tools;
+        for(int i=0;i<7;i++)
+        {
+            this.tools[i]+=a.tools[i];
+        }
     }
     public bool SubmitTool(int toolId)
     {
-        foreach(Tool t in this.tools)
+        if(tools[toolId-1]>0)
         {
-            if(t.id==toolId)
-            {
-                tools.Remove(t);
-                return true;
-            }
+            tools[toolId-1]--;
+            return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }

@@ -5,8 +5,31 @@ using UnityEngine;
 public class Tool : MonoBehaviour
 {
     public int id;
+    public Rigidbody2D body;
+    public Collider2D collider;
+
+
+    void Start() 
+    {
+        Sprite spriteB = Resources.Load<Sprite> ("tool-"+id);
+        gameObject.GetComponent<SpriteRenderer> ().sprite = spriteB;
+    }
+
+    void Update() 
+    {
+        
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Player player=other.gameObject.GetComponent<Player>();
+        if(player!=null)
+        {
+            player.addTool(id);
+            Destroy(this.gameObject);
+        }
+    }
     
-    public virtual void Use(GameCharacter character){}
+    // public virtual void Use(GameCharacter character){}
     static public string GetName(int toolId)
     {
         string res="";
