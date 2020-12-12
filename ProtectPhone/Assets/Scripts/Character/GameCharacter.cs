@@ -31,6 +31,7 @@ public class GameCharacter : MonoBehaviour
     }
     
     public void GetDir() {}
+    
     public void GetPos() {}
 
     public void AddEffect(Effect effect) {}
