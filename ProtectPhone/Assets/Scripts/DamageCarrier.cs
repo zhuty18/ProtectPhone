@@ -20,9 +20,10 @@ public class DamageCarrier : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Enemy attack=other.gameObject.GetComponent<Enemy>();
+        GameCharacter attack=other.gameObject.GetComponent<GameCharacter>();
         if(attack!=null)
         {
+            Debug.Log(attack);
             attack.BeDamaged(this);
             Destroy(gameObject);
         }

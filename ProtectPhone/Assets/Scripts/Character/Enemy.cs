@@ -103,8 +103,9 @@ public class Enemy : GameCharacter
         }
     }
     
-    public new void BeDamaged(DamageCarrier damageCarrier) 
+    public override void BeDamaged(DamageCarrier damageCarrier) 
     {
+        Debug.Log("attack enemy");
         GetDamage(50);
     }
 

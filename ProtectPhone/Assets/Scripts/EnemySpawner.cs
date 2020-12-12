@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
             Enemy e = Instantiate(enemy, transform);
             e.SetTarget(target);
             e.SetPathFinder(pathFinder);
-            Debug.Log("spawned", e);
+            // Debug.Log("spawned", e);
             yield return new WaitForSeconds(spawnPause);
         }
     }

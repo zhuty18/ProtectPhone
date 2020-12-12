@@ -74,4 +74,8 @@ public class Player : GameCharacter
         t.id=1;
         t.Use(this);
     }
+    public override void BeDamaged(DamageCarrier damageCarrier) 
+    {
+        Debug.Log("attack player");
+    }
 }

@@ -49,12 +49,12 @@ public class PathFinderPlatformer : MonoBehaviour {
             enemy.BeIdle();
             return;
         }
-        Debug.Log(dst.transform.position);
-        Debug.Log(src.transform.position);
+        // Debug.Log(dst.transform.position);
+        // Debug.Log(src.transform.position);
 
         // find path
         if (isOnSamePlatform(src, dst)) {
-            Debug.Log("is on same platform");
+            // Debug.Log("is on same platform");
             if (target.position.x - enemy.transform.position.x > 0) {
                 enemy.MoveRight();
             } else {

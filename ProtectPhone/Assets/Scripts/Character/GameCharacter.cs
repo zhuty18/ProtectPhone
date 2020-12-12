@@ -53,7 +53,10 @@ public class GameCharacter : MonoBehaviour
         this.backpack.addTool(id);
     }
 
-    public void BeDamaged(DamageCarrier damageCarrier) {}
+    public virtual void BeDamaged(DamageCarrier damageCarrier) 
+    {
+        Debug.Log("attack");
+    }
 
     public void AfterAttack(GameCharacter damaged) {}
 
