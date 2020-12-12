@@ -10,7 +10,7 @@ public class Player : GameCharacter
     void Start()
     {
         moveSpeed = 10;
-        jumpForce = 5;
+        jumpForce = 8;
         jumpTime = 0;
     }
 
