@@ -7,8 +7,6 @@ public class Tool : MonoBehaviour
     public int id;
     public Rigidbody2D body;
     public Collider2D collider;
-
-
     void Start() 
     {
         Sprite spriteB = Resources.Load<Sprite> ("tool-"+id);
@@ -29,7 +27,18 @@ public class Tool : MonoBehaviour
         }
     }
     
-    // public virtual void Use(GameCharacter character){}
+    public void Use(GameObject bullet,GameCharacter character,int dir)
+    {
+        switch(id)
+        {
+            case 1:
+                Debug.Log(bullet);
+                GameObject f = Instantiate(bullet);
+                DamageCarrier d=f.GetComponent<DamageCarrier>();
+                d.SetPosition(character.transform.position,dir);
+                break;
+        }
+    }
     static public string GetName(int toolId)
     {
         string res="";

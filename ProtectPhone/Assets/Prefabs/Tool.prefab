@@ -99,6 +99,7 @@ MonoBehaviour:
   id: 1
   body: {fileID: 3279739068650751000}
   collider: {fileID: 3279739068650751003}
+  bullet: {fileID: 1552181241316731087, guid: f60f2aaa86341e847a84d7c1f599a09b, type: 3}
 --- !u!50 &3279739068650751000
 Rigidbody2D:
   serializedVersion: 4
