@@ -5,19 +5,23 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public float spawnRate = 1.0f;  // Number of enemies spawned per second
-    public float spawnRateIncreasePerSec = 0.4f;
+    public float spawnRate = 0.05f;  // Number of enemies spawned per second
+    public float spawnRateIncreasePerSec = 0.01f;
     public float maxSpawnRate = 10.0f;
+    public int maxEnemyCount = 3;
 
     public GameObject target;
     public Enemy enemy;
 
     public PathFinderPlatformer pathFinder;
 
+    private HashSet<Enemy> enemies = new HashSet<Enemy>();
+
     private float spawnPause;
     // Start is called before the first frame update
     void Start()
     {
+        maxEnemyCount = 3;
         StartSpawning();
         InitPathFinder();
     }
@@ -44,12 +48,27 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnEnemy(float delay) {
         yield return new WaitForSeconds(delay);
         while (true) {
+            if (enemies.Count >= maxEnemyCount) continue;
+
             Enemy e = Instantiate(enemy, transform);
             e.SetTarget(target);
             e.SetPathFinder(pathFinder);
+            enemies.Add(e);
             // Debug.Log("spawned", e);
             yield return new WaitForSeconds(spawnPause);
         }
+    }
+
+    public bool SpawnBlocked() {
+        if (Vector2.Distance(target.transform.position, transform.position) < 1.2f) {
+            return true;
+        }
+        foreach (Enemy enemy in enemies) {
+            if (Vector2.Distance(enemy.transform.position, transform. position) < 1.2f) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void InitPathFinder() {

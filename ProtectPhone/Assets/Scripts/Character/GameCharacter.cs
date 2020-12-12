@@ -7,6 +7,7 @@ public class GameCharacter : MonoBehaviour
     public string name;
     public int hp;
     public int maxHp;
+    public int atkDmg;
     public float moveSpeed;
     public float jumpForce;
     public int direction;

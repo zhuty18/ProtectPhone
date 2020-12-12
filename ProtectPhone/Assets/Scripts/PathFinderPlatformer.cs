@@ -62,22 +62,36 @@ public class PathFinderPlatformer : MonoBehaviour {
             }
             return;
         }
+        NodePathFinderPlatformer jumpTarget = findClosestEdge(dst);
+        enemy.StartJumpThrough(jumpTarget.transform.position);
 
-        NodePathFinderPlatformer next = bfs(src, dst);
-        // Debug.Log("next");
-        // Debug.Log(next.transform.position);
-        if (next == null) {
-            enemy.BeIdle();
-        } else if (next == src.jumpLeft) {
-            enemy.Jump();
-            enemy.MoveLeft();
-        } else if (next == src.jumpRight) {
-            enemy.Jump();
-            enemy.MoveRight();
-        } else if (next == src.left || next == src.fallLeft) {
-            enemy.MoveLeft();
-        } else if (next == src.right || next == src.fallRight) {
-            enemy.MoveRight();
+        // NodePathFinderPlatformer next = bfs(src, dst);
+        // // Debug.Log("next");
+        // // Debug.Log(next.transform.position);
+        // if (next == null) {
+        //     enemy.BeIdle();
+        // } else if (next == src.jumpLeft) {
+        //     enemy.Jump();
+        //     enemy.MoveLeft();
+        // } else if (next == src.jumpRight) {
+        //     enemy.Jump();
+        //     enemy.MoveRight();
+        // } else if (next == src.left || next == src.fallLeft) {
+        //     enemy.MoveLeft();
+        // } else if (next == src.right || next == src.fallRight) {
+        //     enemy.MoveRight();
+        // }
+    }
+
+    public NodePathFinderPlatformer findClosestEdge(NodePathFinderPlatformer node) {
+        if (Random.value < 0.5f) {
+            // right
+            while (node.right != null) node = node.right;
+            return node;
+        } else {
+            // left
+            while (node.left != null) node = node.left;
+            return node;
         }
     }
 
@@ -87,6 +101,7 @@ public class PathFinderPlatformer : MonoBehaviour {
         float targetY = pos.y;
         int idx = xToCol(pos.x);
         // Debug.Log($"find closest {idx}");
+        if (idx < 0 || idx > nodes.Count) return null;
         foreach (NodePathFinderPlatformer node in nodes[idx]) {
             // Debug.Log(node.transform.position.y);
             // if (node.transform.position.y <= pos.y) return node;
@@ -100,35 +115,6 @@ public class PathFinderPlatformer : MonoBehaviour {
         if (closest != null) {
             return closest;
         }
-        // if (closest == null) {
-        //     for (int i = 0; i < nodes.Count; ++i) {
-        //         if (idx - i >= 0) {
-        //             foreach (NodePathFinderPlatformer node in nodes[idx - i]) {
-        //                 float nodey = pos.y;
-        //                 if (Mathf.Abs(nodey - targetY) < minDiff) {
-        //                     closest = node;
-        //                     minDiff = Mathf.Abs(nodey - targetY);
-        //                 }
-        //             }
-        //             if (closest != null) {
-        //                 return closest;
-        //             }
-        //         }
-
-        //         if (idx + i < nodes.Count) {
-        //             foreach (NodePathFinderPlatformer node in nodes[idx + i]) {
-        //                 float nodey = pos.y;
-        //                 if (Mathf.Abs(nodey - targetY) < minDiff) {
-        //                     closest = node;
-        //                     minDiff = Mathf.Abs(nodey - targetY);
-        //                 }
-        //             }
-        //             if (closest != null) {
-        //                 return closest;
-        //             }
-        //         }
-        //     }
-        // }
         return closest;
     }
 
@@ -253,7 +239,7 @@ public class PathFinderPlatformer : MonoBehaviour {
         }
 
         // add jump edge
-        AddJumpNeighbors();
+        // AddJumpNeighbors();
     }
 
     public void AddJumpNeighbors() {

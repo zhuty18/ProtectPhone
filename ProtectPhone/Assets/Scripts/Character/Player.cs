@@ -76,6 +76,24 @@ public class Player : GameCharacter
     }
     public override void BeDamaged(DamageCarrier damageCarrier) 
     {
-        Debug.Log("attack player");
+        Debug.Log("player is damaged");
+        if (damageCarrier == null) {
+            // melee attack
+            Debug.Log("it was a melee attack");
+        }
+    }
+
+    public void BeDamagedInt(int amount) {
+        if (hp <= (int) Mathf.RoundToInt(amount)) {
+            hp = 0;
+            Die();
+        } else {
+            hp -= (int) Mathf.RoundToInt(amount);
+        }
+    }
+
+    public void Die() {
+        Debug.Log("player dies");
+        Destroy(gameObject);
     }
 }
