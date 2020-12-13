@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : GameCharacter
 {
     public int jumpTime;
     public GameObject bullet;
     public Tool tool;
+    public Text HPShow;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class Player : GameCharacter
         {
             Fire();
         }
+        HPShow.text="HP: "+hp+" / "+maxHp;
     }
 
     public bool IsGrounded()
