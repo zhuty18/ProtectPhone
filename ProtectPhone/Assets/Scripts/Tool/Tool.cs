@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tool : MonoBehaviour
 {
     public int id;
+    public int amount=0;
     public Rigidbody2D body;
     public Collider2D collider;
     void Start() 
@@ -24,9 +25,12 @@ public class Tool : MonoBehaviour
         Player player=other.gameObject.GetComponent<Player>();
         if(player!=null)
         {
-            if(id==2)
+            if(id==2&&amount==0)
             {
-                player.backpack.addTool(id,100);
+                player.backpack.addTool(id,30);
+            }
+            else if(id==2){
+                player.backpack.addTool(id,amount);
             }
             else{
             player.backpack.addTool(id);

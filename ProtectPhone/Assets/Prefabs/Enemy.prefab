@@ -160,7 +160,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   target: {fileID: 0}
-  weapon: {fileID: 0}
+  resource: {fileID: 4275986486284953694, guid: 56b96285df2bb374c94e1ee0c9555af5,
+    type: 3}
   pathFinder: {fileID: 0}
   height: 0
   width: 0
