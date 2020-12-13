@@ -15,9 +15,9 @@ public class Mission : MonoBehaviour
     
     void Start()
     {
-        des.text=target.name+"想要一个"+Tool.GetName(want);
-        phone=this.transform.GetComponent<CanvasGroup>();
         want=6;
+        des.text=target.name+"想要一个"+Tool.GetName(want)+"。";
+        phone=this.transform.GetComponent<CanvasGroup>();
         phone.alpha=0;
         reward=Instantiate(myPack).GetComponent<Pack>();
         reward.addTool(3);
@@ -26,13 +26,17 @@ public class Mission : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            if(phone.alpha==0)
+            Player player=GameObject.Find("Player").GetComponent<Player>();
+            if(player.backpack.tools[4]>0)
             {
-                phone.alpha=1;
-            }
-            else
-            {
-                phone.alpha=0;
+                if(phone.alpha==0)
+                {
+                    phone.alpha=1;
+                }
+                else
+                {
+                    phone.alpha=0;
+                }
             }
         }
     }

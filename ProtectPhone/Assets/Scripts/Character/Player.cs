@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : GameCharacter
 {
@@ -14,6 +16,9 @@ public class Player : GameCharacter
     public Collider2D groundCollider;
     public GameObject bullet;
     public Animator anim;
+    public Text HPShow;
+    public EndView ev;
+    public int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +30,11 @@ public class Player : GameCharacter
         maxStrength = 200;
         strength = 0;
         healthRecoveryTimer = 0.5f;
-
         anim = this.GetComponent<Animator>();
+        jumpForce = 8;
+        jumpTime = 0;
+        score=0;
+        ev.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -73,7 +81,6 @@ public class Player : GameCharacter
         {
             Fire();
         }
-
         // Strength
         if(Input.GetKey(KeyCode.LeftShift))
         {
@@ -99,6 +106,11 @@ public class Player : GameCharacter
             }
             healthRecoveryTimer = 2.0f;
         }
+        HPShow.text="HP: "+hp+" / "+maxHp;
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MajorScene");
+        }
     }
 
     public bool IsGrounded()
@@ -123,11 +135,20 @@ public class Player : GameCharacter
         // Tool t=new Tool();
         // t.id=1;
         anim.SetTrigger("attack");
-        tool.Use(this);
+        if(this.backpack.tools[0]>0&&this.backpack.tools[1]>0)
+        {
+            tool.Use(this);
+            backpack.tools[1]--;
+        }
+        else
+        {
+            Debug.Log("You don't have weapon!");
+        }
     }
     public override void BeDamaged(DamageCarrier damageCarrier) 
     {
         Debug.Log("player is damaged");
+        BeDamagedInt(50);
     }
 
     public void BeDamagedInt(int amount) {
@@ -143,6 +164,8 @@ public class Player : GameCharacter
     public void Die() {
         Debug.Log("player dies");
         direction = 0;
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        ev.gameObject.SetActive(true);
+        ev.info.text="游戏结束！你的得分为"+score+"！\n按R重新开始！";
     }
 }

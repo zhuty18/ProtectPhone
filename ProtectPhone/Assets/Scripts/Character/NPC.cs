@@ -8,7 +8,7 @@ public class NPC : GameCharacter
     public Dialog dia;
     public string hello;
     public string want;
-    public GameCharacter player;
+    public Player player;
 
     void Start()
     {
@@ -57,6 +57,7 @@ public class NPC : GameCharacter
             dia.content.text="谢谢你！";
             player.GainReward(myMission.reward);
             myMission.Finish();
+            player.score+=100;
         }
         else
         {

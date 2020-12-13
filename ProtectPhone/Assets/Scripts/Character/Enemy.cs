@@ -9,7 +9,7 @@ public class Enemy : GameCharacter
     int id;
 
     public Player target;
-    public Tool weapon;
+    public GameObject resource;
     public PathFinderPlatformer pathFinder;
 
     public float height;
@@ -137,6 +137,8 @@ public class Enemy : GameCharacter
     public void Die() {
         Debug.Log($"enemy {id} dies");
         if (enemySpawner != null) enemySpawner.OnEnemyDestroy(this);
+        Tool res=Instantiate(resource,this.transform.position,this.transform.rotation).GetComponent<Tool>();
+        res.amount=(int)Random.Range(1f, 10f);
         Destroy(gameObject);
     }
 
@@ -145,6 +147,7 @@ public class Enemy : GameCharacter
         if (hp <= (int) Mathf.RoundToInt(amount)) {
             hp = 0;
             Die();
+            target.score++;
         } else {
             hp -= (int) Mathf.RoundToInt(amount);
         }
