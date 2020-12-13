@@ -19,7 +19,12 @@ public class Dialog : MonoBehaviour
     }
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Y)&&Page==1){
+            ClickLeft();
+        }
+        else if(Input.GetKeyDown(KeyCode.N)){
+            ClickRight();
+        }
     }
     public void Show()
     {
@@ -65,9 +70,9 @@ public class Dialog : MonoBehaviour
     }
     private void Hello()
     {
-        this.Left.title.text="给你";
+        this.Left.title.text="给你(Y)";
         this.Left.gameObject.SetActive(true);
-        this.Right.title.text="不给";
+        this.Right.title.text="不给(N)";
         this.Right.gameObject.SetActive(true);
         this.Page=1;
     }
@@ -75,7 +80,7 @@ public class Dialog : MonoBehaviour
     {
         this.Page=2;
         this.Left.gameObject.SetActive(false);
-        this.Right.title.text="再见";
+        this.Right.title.text="再见(N)";
         this.Right.gameObject.SetActive(true);
     }
 }

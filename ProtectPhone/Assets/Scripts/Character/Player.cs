@@ -31,7 +31,7 @@ public class Player : GameCharacter
         strength = 0;
         healthRecoveryTimer = 0.5f;
         anim = this.GetComponent<Animator>();
-        jumpForce = 8;
+        // jumpForce = 8;
         jumpTime = 0;
         score=0;
         ev.gameObject.SetActive(false);
