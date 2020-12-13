@@ -147,6 +147,7 @@ public class Enemy : GameCharacter
         if (hp <= (int) Mathf.RoundToInt(amount)) {
             hp = 0;
             Die();
+            target.score++;
         } else {
             hp -= (int) Mathf.RoundToInt(amount);
         }

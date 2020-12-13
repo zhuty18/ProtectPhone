@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : GameCharacter
 {
@@ -9,6 +10,8 @@ public class Player : GameCharacter
     public GameObject bullet;
     public Tool tool;
     public Text HPShow;
+    public EndView ev;
+    public int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,8 @@ public class Player : GameCharacter
         moveSpeed = 10;
         jumpForce = 8;
         jumpTime = 0;
+        score=0;
+        ev.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,6 +60,10 @@ public class Player : GameCharacter
             Fire();
         }
         HPShow.text="HP: "+hp+" / "+maxHp;
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("MajorScene");
+        }
     }
 
     public bool IsGrounded()
@@ -106,6 +115,8 @@ public class Player : GameCharacter
     public void Die() {
         Debug.Log("player dies");
         direction = 0;
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        ev.gameObject.SetActive(true);
+        ev.info.text="游戏结束！你的得分为"+score+"！\n按R重新开始！";
     }
 }

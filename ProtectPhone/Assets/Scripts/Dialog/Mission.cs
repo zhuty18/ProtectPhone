@@ -26,13 +26,17 @@ public class Mission : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            if(phone.alpha==0)
+            Player player=GameObject.Find("Player").GetComponent<Player>();
+            if(player.backpack.tools[4]>0)
             {
-                phone.alpha=1;
-            }
-            else
-            {
-                phone.alpha=0;
+                if(phone.alpha==0)
+                {
+                    phone.alpha=1;
+                }
+                else
+                {
+                    phone.alpha=0;
+                }
             }
         }
     }
