@@ -6,9 +6,11 @@ public class Player : GameCharacter
 {
     public int jumpTime;
     public GameObject bullet;
+    public Tool tool;
     // Start is called before the first frame update
     void Start()
     {
+        hp = maxHp;
         moveSpeed = 10;
         jumpForce = 8;
         jumpTime = 0;
@@ -70,20 +72,17 @@ public class Player : GameCharacter
         // GameObject f = Instantiate(bullet);
         // DamageCarrier d=f.GetComponent<DamageCarrier>();
         // d.SetPosition(transform.position,direction);
-        Tool t=new Tool();
-        t.id=1;
-        t.Use(this);
+        // Tool t=new Tool();
+        // t.id=1;
+        tool.Use(this);
     }
     public override void BeDamaged(DamageCarrier damageCarrier) 
     {
         Debug.Log("player is damaged");
-        if (damageCarrier == null) {
-            // melee attack
-            Debug.Log("it was a melee attack");
-        }
     }
 
     public void BeDamagedInt(int amount) {
+        Debug.Log("player is damaged");
         if (hp <= (int) Mathf.RoundToInt(amount)) {
             hp = 0;
             Die();
@@ -94,6 +93,7 @@ public class Player : GameCharacter
 
     public void Die() {
         Debug.Log("player dies");
+        direction = 0;
         Destroy(gameObject);
     }
 }

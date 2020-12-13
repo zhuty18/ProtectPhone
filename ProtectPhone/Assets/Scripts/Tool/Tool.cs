@@ -10,7 +10,9 @@ public class Tool : MonoBehaviour
     void Start() 
     {
         Sprite spriteB = Resources.Load<Sprite> ("tool-"+id);
-        gameObject.GetComponent<SpriteRenderer> ().sprite = spriteB;
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer> ();
+        if (sr != null)
+            sr.sprite = spriteB;
     }
 
     void Update() 

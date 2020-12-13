@@ -62,8 +62,11 @@ public class PathFinderPlatformer : MonoBehaviour {
             }
             return;
         }
-        NodePathFinderPlatformer jumpTarget = findClosestEdge(dst);
-        enemy.StartJumpThrough(jumpTarget.transform.position);
+        // NodePathFinderPlatformer jumpTarget = getEdge(dst);
+        // Vector2 jumpTerm = new Vector2(jumpTarget.transform.position.x, jumpTarget.transform.position.y);
+        // enemy.StartJumpThrough(jumpTerm + Vector2.up * 0.8f);
+
+        enemy.StartJumpThrough(target.position + Vector3.up * 1.0f + Vector3.right * (-0.5f + Random.value) * 3f);
 
         // NodePathFinderPlatformer next = bfs(src, dst);
         // // Debug.Log("next");
@@ -83,14 +86,19 @@ public class PathFinderPlatformer : MonoBehaviour {
         // }
     }
 
-    public NodePathFinderPlatformer findClosestEdge(NodePathFinderPlatformer node) {
-        if (Random.value < 0.5f) {
+    public NodePathFinderPlatformer getEdge(NodePathFinderPlatformer node) {
+        float r = Random.value;
+        if (r < 0.3f) {
             // right
             while (node.right != null) node = node.right;
             return node;
-        } else {
+        } else if (r < 0.3f) {
             // left
             while (node.left != null) node = node.left;
+            return node;
+        } else {
+            if (node.left != null) return node.left;
+            else if (node.right != null) return node.right;
             return node;
         }
     }

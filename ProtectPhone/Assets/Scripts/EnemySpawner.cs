@@ -8,12 +8,12 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRate = 0.05f;  // Number of enemies spawned per second
     public float spawnRateIncreasePerSec = 0.01f;
     public float maxSpawnRate = 10.0f;
-    public int maxEnemyCount = 3;
+    public int maxEnemyCount = 16;
 
     public GameObject target;
     public Enemy enemy;
 
-    public PathFinderPlatformer pathFinder;
+    // public PathFinderPlatformer pathFinder;
 
     private HashSet<Enemy> enemies = new HashSet<Enemy>();
 
@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxEnemyCount = 3;
+        // maxEnemyCount = 3;
         StartSpawning();
         InitPathFinder();
     }
@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void StartSpawning() {
-        // Debug.Log("start spawning");
+        Debug.Log("start spawning");
         StartCoroutine(SpawnEnemy(1.0f));
         InvokeRepeating("IncreaseSpawnRate", 0, 1.0f);
     }
@@ -48,15 +48,20 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnEnemy(float delay) {
         yield return new WaitForSeconds(delay);
         while (true) {
-            if (enemies.Count >= maxEnemyCount) continue;
-
-            Enemy e = Instantiate(enemy, transform);
-            e.SetTarget(target);
-            e.SetPathFinder(pathFinder);
-            enemies.Add(e);
-            // Debug.Log("spawned", e);
+            if (target != null && enemies.Count < maxEnemyCount) {
+                Enemy e = Instantiate(enemy, transform);
+                e.SetTarget(target);
+                // e.SetPathFinder(pathFinder);
+                e.SetEnemySpawner(this);
+                enemies.Add(e);
+                // Debug.Log("spawned", e);
+            }
             yield return new WaitForSeconds(spawnPause);
         }
+    }
+
+    public void OnEnemyDestroy(Enemy e) {
+        enemies.Remove(e);
     }
 
     public bool SpawnBlocked() {
@@ -72,6 +77,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void InitPathFinder() {
-        pathFinder.Init(enemy.width, enemy.height, enemy.moveSpeed, enemy.jumpForce, enemy.gravity);
+        // pathFinder.Init(enemy.width, enemy.height, enemy.moveSpeed, enemy.jumpForce, enemy.gravity);
     }
 }

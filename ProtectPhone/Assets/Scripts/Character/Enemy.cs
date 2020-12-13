@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using UnityEngine.AstarPathfindingProject;
 
 public class Enemy : GameCharacter
 {
@@ -14,7 +15,7 @@ public class Enemy : GameCharacter
     public float height;
     public float width;
 
-    public float gravity = -9.8f;
+    public float gravity = -12f;
     private Vector2 velocity = Vector2.zero;
     private float lastAttack;
 
@@ -22,6 +23,8 @@ public class Enemy : GameCharacter
 
     private BoxCollider2D cld;
     private Rigidbody2D rb;
+
+    EnemySpawner enemySpawner;
 
     Vector2 jumpDst;
     Vector2 jumpSrc;
@@ -40,41 +43,48 @@ public class Enemy : GameCharacter
         // moveSpeed = 10;
         height = 1.0f;
         width = 1.0f;
-        hp = 100;
+        // hp = 100;
         isJumping = false;
 
         // weapon = new Tool();
         // weapon.id=1;
         lastAttack=Time.time;
 
-        cld = GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>();
+        cld = GetComponentInChildren<BoxCollider2D>();
+        rb = GetComponentInChildren<Rigidbody2D>();
         rb.gravityScale = 1f;
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (target == null) {
-            // player is dead
-            if (isJumping) StopJumpThrough();
-            BeIdle();
-            return;
-        }
-        if (!isJumping) { 
-            MoveTowardsTarget();
-            if(InRange() && (Time.time - lastAttack>1.0f)){
-                lastAttack = Time.time;
-                Debug.Log($"enemy {id} attacks");
-                Attack();
-            }
-        }
+    void Update(){
         HandleSelfDestruction();
+        // if (target == null) {
+        //     // player is dead
+        //     if (isJumping) StopJumpThrough();
+        //     BeIdle();
+        //     return;
+        // }
+        // if (!isJumping) { 
+        //     if (pathFinder != null) {
+        //         MoveTowardsTarget();
+        //     }
+        if(InRange() && (Time.time - lastAttack>1.0f)){
+            lastAttack = Time.time;
+            Debug.Log($"enemy {id} attacks");
+            Attack();
+        }
+        // }
+        // UpdatePos();
+    }
+
+    public void SetEnemySpawner(EnemySpawner es) {
+        enemySpawner = es;
     }
 
     bool InRange()
     {
+        if (target == null) return false;
         double dx=target.transform.position.x-this.transform.position.x;
         double dy=target.transform.position.y-this.transform.position.y;
         double dis=System.Math.Sqrt((dx*dx)+(dy*dy));
@@ -88,38 +98,27 @@ public class Enemy : GameCharacter
         }
     }
 
-    void FixedUpdate() {
-        // if (!IsOnGround()) {
-        //     velocity.y += gravity * Time.deltaTime;
-        // } else {
-        //     Debug.Log("on ground");
-        //     if (velocity.y < 0) {
-        //         velocity.y = 0;
-        //     }
-        // }
-        UpdatePos();
-        // if (velocity.x < 0) {
-        //     if (IsOnLeftWall()) {
-        //         velocity.x = 0;
-        //     }
-        // } else {
-        //     if (IsOnRightWall()) {
-        //         velocity.x = 0;
-        //     }
-        // }
-        // body.velocity+=this.velocity;
-        // transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime;
-    }
-
     void MoveTowardsTarget() {
         // the following function moves this Enemy object
-        // it might call Jump, MoveLeft, MoveRight
+        // it might call JumpThrough, MoveLeft, MoveRight
         pathFinder.GetOptimalPath(this, target.transform);
     }
 
     void HandleSelfDestruction() {
+        if (transform.position.x > 100f || transform.position.y > 100f) {
+            isJumping = false;
+            direction = 0;
+            Debug.Log($"destroys enemy {id}");
+            enemySpawner.OnEnemyDestroy(this);
+            Destroy(transform.parent.gameObject);
+            return;
+        }
+        if (target == null) return;
         if (DistToTarget() > maxDistToTarget) {
-            Destroy(gameObject);
+            Debug.Log($"destroys enemy {id}");
+            enemySpawner.OnEnemyDestroy(this);
+            Destroy(transform.parent.gameObject);
+            return;
         }
     }
 
@@ -136,10 +135,13 @@ public class Enemy : GameCharacter
     }
 
     public void Die() {
+        Debug.Log($"enemy {id} dies");
+        if (enemySpawner != null) enemySpawner.OnEnemyDestroy(this);
         Destroy(gameObject);
     }
 
     public void GetDamage(float amount) {
+        Debug.Log($"enemy {id} gets damage");
         if (hp <= (int) Mathf.RoundToInt(amount)) {
             hp = 0;
             Die();
@@ -155,6 +157,8 @@ public class Enemy : GameCharacter
     }
 
     public void SetTarget(GameObject target) {
+        // AIDestinationSetter dstSetter = GetComponent<AIDestinationSetter>();
+        // dstSetter.target = target.transform;
         this.target = target.GetComponent<Player>();
     }
 
@@ -172,22 +176,22 @@ public class Enemy : GameCharacter
 
     public void MoveRight() {
         // velocity.x = moveSpeed;
-        if (direction != 1)
-            Debug.Log($"enemy {id} moves right");
+        // if (direction != 1)
+            // Debug.Log($"enemy {id} moves right");
         direction = 1;
     }
 
     public void MoveLeft() {
         // velocity.x = -moveSpeed;
-        if (direction != -1)
-            Debug.Log($"enemy {id} moves left");
+        // if (direction != -1)
+            // Debug.Log($"enemy {id} moves left");
         direction=-1;
     }
 
     public void BeIdle() {
         // velocity.x = 0;
         if (direction != 0)
-            Debug.Log($"enemy {id} becomes idle");
+            // Debug.Log($"enemy {id} becomes idle");
         direction = 0;
     }
 
@@ -227,7 +231,7 @@ public class Enemy : GameCharacter
     }
 
     public void StartJumpThrough(Vector2 target) {
-        Debug.Log($"enemy {id} jumps, target = ({target.x}, {target.y})");
+        // Debug.Log($"enemy {id} jumps, target = ({target.x}, {target.y})");
 
         rb.isKinematic = true;
         cld.enabled = false;
@@ -243,7 +247,7 @@ public class Enemy : GameCharacter
         float t = (target.x - x0) / jumpVx;
         float vy = (target.y - y0 - 0.5f * gravity * t * t) / t;
         
-        Debug.Log($"pos0 = ({x0}, {y0}), target = ({target.x}, {target.y}), t0 = {jumpStartTime}, t = {t}, v = ({jumpVx}, {vy})");
+        // Debug.Log($"pos0 = ({x0}, {y0}), target = ({target.x}, {target.y}), t0 = {jumpStartTime}, t = {t}, v = ({jumpVx}, {vy})");
 
         // velocity.y = vy;
         jumpVy = vy;
@@ -260,14 +264,17 @@ public class Enemy : GameCharacter
     }
 
     public void UpdatePos() {
+        if (target == null) {
+            return;
+        }
         if (isJumping) {
             if (DistTo(jumpDst) < 0.1f) {
                 StopJumpThrough();
             } else {
                 float t = Time.time - jumpStartTime;
-                float x = jumpSrc.x + jumpVx * t;
-                float y = jumpSrc.y + jumpVy * t + 0.5f * gravity * t * t;
-                transform.position = new Vector2(x, y);
+                float x = jumpVx * t;
+                float y = jumpVy * t + 0.5f * gravity * t * t;
+                transform.position = jumpSrc + new Vector2(x, y);
             }
         } else {
             body.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);

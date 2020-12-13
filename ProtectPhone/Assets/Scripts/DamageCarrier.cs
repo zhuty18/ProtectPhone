@@ -21,6 +21,7 @@ public class DamageCarrier : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameCharacter attack=other.gameObject.GetComponent<GameCharacter>();
+        if (attack == null) attack = other.gameObject.GetComponentInParent<GameCharacter>();
         if(attack!=null)
         {
             Debug.Log(attack);

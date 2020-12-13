@@ -56,7 +56,7 @@ public class GameCharacter : MonoBehaviour
 
     public virtual void BeDamaged(DamageCarrier damageCarrier) 
     {
-        Debug.Log("attack");
+        Debug.Log("is damaged");
     }
 
     public void AfterAttack(GameCharacter damaged) {}
