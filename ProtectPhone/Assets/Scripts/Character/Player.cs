@@ -59,7 +59,7 @@ public class Player : GameCharacter
         transform.localScale = new Vector3(direction * System.Math.Abs(oScale.x), oScale.y, oScale.z);
 
         //Move
-        if(hztMove != 0 && !collider.IsTouchingLayers(groundLayer)) 
+        if(hztMove != 0 && (!collider.IsTouchingLayers(groundLayer) || IsGrounded())) 
         {
             //body.velocity.x = hztMove*moveSpeed;
             //body.AddForce(new Vector2(hztMove*moveSpeed,body.velocity.y));
