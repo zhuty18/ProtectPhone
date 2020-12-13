@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform playertrack;
+    public Transform target;
+    public float smoothing = 5f;
+
+    Vector3 directionOffset;
+
+    void shootBegin(){
+        //todo
+    }
+
+    void shootEnd(){
+        //todo
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        directionOffset = new Vector3(5, 0, 0);
+    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = new Vector3(playertrack.position.x , playertrack.position.y, -10f);
+        Debug.Log(transform.localScale);
+        Vector3 tragetPos = target.position + System.Math.Sign(target.localScale.x) * directionOffset;
+        transform.position = Vector3.Lerp(transform.position, tragetPos, smoothing * Time.deltaTime);
+
     }
 }

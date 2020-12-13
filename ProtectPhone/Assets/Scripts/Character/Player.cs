@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class Player : GameCharacter
 {
-    public int jumpTime;
-    public GameObject bullet;
     public Tool tool;
+    public int jumpTime;
+    public int strength;
+    public int maxStrength;
+    public int maxSpeed;
+    public int commonSpeed;
+    public float healthRecoveryTimer;
+    public Collider2D groundCollider;
+    public GameObject bullet;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        maxHp = 100;
         hp = maxHp;
         moveSpeed = 10;
-        jumpForce = 8;
-        jumpTime = 0;
+        maxSpeed = 20;
+        commonSpeed = 10;
+        maxStrength = 200;
+        strength = 0;
+        healthRecoveryTimer = 0.5f;
+
+        anim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
         float hztMove = Input.GetAxis("Horizontal");
         float dir=Input.GetAxisRaw("Horizontal");
         if(dir<0){
@@ -33,13 +47,20 @@ public class Player : GameCharacter
             jumpTime=0;
         }
         //deltatime for 不同电脑兼容 
+        Vector3 oScale = transform.localScale;
+        transform.localScale = new Vector3(direction * System.Math.Abs(oScale.x), oScale.y, oScale.z);
 
         //Move
-        if(hztMove != 0 ) 
+        if(hztMove != 0 && !collider.IsTouchingLayers(groundLayer)) 
         {
             //body.velocity.x = hztMove*moveSpeed;
             //body.AddForce(new Vector2(hztMove*moveSpeed,body.velocity.y));
+            
+            anim.SetFloat("speed", 1);
             body.velocity = new Vector2(hztMove*moveSpeed,body.velocity.y);
+        }
+        else{
+            anim.SetFloat("speed", 0);
         }
 
         if(Input.GetButtonDown("Jump")&&jumpTime<2)
@@ -52,19 +73,46 @@ public class Player : GameCharacter
         {
             Fire();
         }
+
+        // Strength
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            if(strength > 0){
+                strength--;
+                moveSpeed = maxSpeed;
+            } else{
+                moveSpeed = commonSpeed;
+            }
+        } else {
+            moveSpeed = commonSpeed;
+            if(strength < maxStrength){
+                strength++;
+            }
+        }
+
+        // HP
+        healthRecoveryTimer -= Time.deltaTime;
+        if (healthRecoveryTimer <= 0) {
+            if(hp < maxHp)
+            {
+                hp += 1;
+            }
+            healthRecoveryTimer = 2.0f;
+        }
     }
 
     public bool IsGrounded()
     {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 1.0f;
+        // Vector2 position = transform.position;
+        // Vector2 direction = Vector2.down;
+        // float distance = 1.0f;
         
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-        if (hit.collider != null) {
-            return true;
-        }
-        return false;
+        // RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        // if (hit.collider != null) {
+        //     return true;
+        // }
+        // return false;
+        return groundCollider.IsTouchingLayers(groundLayer);
     }
 
     public void Fire()
@@ -74,6 +122,7 @@ public class Player : GameCharacter
         // d.SetPosition(transform.position,direction);
         // Tool t=new Tool();
         // t.id=1;
+        anim.SetTrigger("attack");
         tool.Use(this);
     }
     public override void BeDamaged(DamageCarrier damageCarrier) 
