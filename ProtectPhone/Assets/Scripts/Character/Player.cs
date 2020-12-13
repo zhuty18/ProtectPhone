@@ -109,7 +109,7 @@ public class Player : GameCharacter
         HPShow.text="HP: "+hp+" / "+maxHp;
         if(Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("MajorScene");
+            SceneManager.LoadScene("UIi");
         }
     }
 

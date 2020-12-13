@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     // public PathFinderPlatformer pathFinder;
 
-    private static HashSet<Enemy> enemies = new HashSet<Enemy>();
+    private HashSet<Enemy> enemies = new HashSet<Enemy>();
 
     private float spawnPause;
     // Start is called before the first frame update
