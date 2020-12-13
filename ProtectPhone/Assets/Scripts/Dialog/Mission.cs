@@ -15,9 +15,9 @@ public class Mission : MonoBehaviour
     
     void Start()
     {
-        des.text=target.name+"想要一个"+Tool.GetName(want);
-        phone=this.transform.GetComponent<CanvasGroup>();
         want=6;
+        des.text=target.name+"想要一个"+Tool.GetName(want)+"。";
+        phone=this.transform.GetComponent<CanvasGroup>();
         phone.alpha=0;
         reward=Instantiate(myPack).GetComponent<Pack>();
         reward.addTool(3);
