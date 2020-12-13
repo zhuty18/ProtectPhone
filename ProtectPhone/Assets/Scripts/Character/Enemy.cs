@@ -105,7 +105,7 @@ public class Enemy : GameCharacter
     }
 
     void HandleSelfDestruction() {
-        if (transform.position.x > 100f || transform.position.y > 100f) {
+        if (transform.position.x > 1000f || transform.position.y > 1000f) {
             isJumping = false;
             direction = 0;
             Debug.Log($"destroys enemy {id}");

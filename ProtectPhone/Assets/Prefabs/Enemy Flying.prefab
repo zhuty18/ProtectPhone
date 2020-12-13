@@ -275,4 +275,4 @@ MonoBehaviour:
   height: 0
   width: 0
   gravity: -12
-  maxDistToTarget: 60
+  maxDistToTarget: 6000
