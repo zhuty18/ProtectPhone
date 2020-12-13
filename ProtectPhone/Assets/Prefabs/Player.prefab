@@ -125,7 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   hp: 0
-  maxHp: 0
+  maxHp: 200
+  atkDmg: 0
   moveSpeed: 0
   jumpForce: 0
   direction: 0
@@ -137,6 +138,7 @@ MonoBehaviour:
     m_Bits: 0
   jumpTime: 0
   bullet: {fileID: 1552181241316731087, guid: f60f2aaa86341e847a84d7c1f599a09b, type: 3}
+  tool: {fileID: 3279739068650751001, guid: c3b952475b6a3f444bb8bc1df6ed0493, type: 3}
 --- !u!50 &2981148601231699880
 Rigidbody2D:
   serializedVersion: 4

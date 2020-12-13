@@ -46,6 +46,6 @@ MonoBehaviour:
   spawnRate: 1
   spawnRateIncreasePerSec: 0.4
   maxSpawnRate: 10
+  maxEnemyCount: 16
   target: {fileID: 0}
-  enemy: {fileID: -4322364278533685013, guid: 208cc8b8915fbe84db906635517919e6, type: 3}
-  pathFinder: {fileID: 0}
+  enemy: {fileID: 1905483468724712153, guid: d78313634a7fa0f42a33e209b3a9e4f3, type: 3}
