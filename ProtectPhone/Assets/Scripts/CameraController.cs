@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -29,5 +30,9 @@ public class CameraController : MonoBehaviour
         Vector3 tragetPos = target.position + System.Math.Sign(target.localScale.x) * directionOffset;
         transform.position = Vector3.Lerp(transform.position, tragetPos, smoothing * Time.deltaTime);
 
+    }
+
+    void BackToMainMenu() {
+        SceneManager.LoadScene("UIi");
     }
 }
