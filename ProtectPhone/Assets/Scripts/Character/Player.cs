@@ -74,11 +74,20 @@ public class Player : GameCharacter
         // d.SetPosition(transform.position,direction);
         // Tool t=new Tool();
         // t.id=1;
-        tool.Use(this);
+        if(this.backpack.tools[0]>0&&this.backpack.tools[1]>0)
+        {
+            tool.Use(this);
+            backpack.tools[1]--;
+        }
+        else
+        {
+            Debug.Log("You don't have weapon!");
+        }
     }
     public override void BeDamaged(DamageCarrier damageCarrier) 
     {
         Debug.Log("player is damaged");
+        BeDamagedInt(50);
     }
 
     public void BeDamagedInt(int amount) {

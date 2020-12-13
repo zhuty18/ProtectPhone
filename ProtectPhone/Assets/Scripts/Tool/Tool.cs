@@ -24,7 +24,13 @@ public class Tool : MonoBehaviour
         Player player=other.gameObject.GetComponent<Player>();
         if(player!=null)
         {
-            player.addTool(id);
+            if(id==2)
+            {
+                player.backpack.addTool(id,100);
+            }
+            else{
+            player.backpack.addTool(id);
+            }
             Destroy(this.gameObject);
         }
     }

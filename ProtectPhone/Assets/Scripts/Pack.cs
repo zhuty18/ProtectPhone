@@ -14,9 +14,9 @@ public class Pack : MonoBehaviour
             tools[i]=0;
         }
     }
-    public void addTool(int toolId)
+    public void addTool(int toolId,int amount=1)
     {
-        tools[toolId-1]++;
+        tools[toolId-1]+=amount;
     }
     public void addPack(Pack a)
     {
